@@ -1,5 +1,6 @@
-# Stream On Demand
 ![alt tag](https://raw.githubusercontent.com/Zanzibar82/plugin.video.streamondemand/master/icon.png)
+# Stream On Demand
+
 Italian son of pelisalacarta v4.0.3,
 and only with Italian channels:
 STREAM ON DEMAND
