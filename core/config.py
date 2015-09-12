@@ -2,8 +2,8 @@
 #------------------------------------------------------------
 # Parámetros de configuración (kodi)
 #------------------------------------------------------------
-# pelisalacarta
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# streamondemand / pelisalacarta 4.0.3
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 # Creado por: Jesús (tvalacarta@gmail.com)
 # Licencia: GPL (http://www.gnu.org/licenses/gpl-3.0.html)
@@ -16,9 +16,9 @@ import xbmcaddon
 import xbmc
 
 PLATFORM_NAME = "kodi-isengard"
-print "pelisalacarta.core.config PLATFORM_NAME="+PLATFORM_NAME
+print "streamondemand.core.config PLATFORM_NAME="+PLATFORM_NAME
 
-PLUGIN_NAME = "pelisalacarta.italiano"
+PLUGIN_NAME = "streamondemand"
 __settings__ = xbmcaddon.Addon(id="plugin.video."+PLUGIN_NAME)
 __language__ = __settings__.getLocalizedString
 
@@ -106,7 +106,7 @@ def get_cookie_data():
 def verify_directories_created():
     import logger
     import os
-    logger.info("pelisalacarta.core.config.verify_directories_created")
+    logger.info("streamondemand.core.config.verify_directories_created")
 
     # Force download path if empty
     download_path = get_setting("downloadpath")
@@ -176,6 +176,6 @@ def verify_directories_created():
         except:
             pass
 
-print "pelisalacarta.core.config runtime path = "+get_runtime_path()
-print "pelisalacarta.core.config data path = "+get_data_path()
-print "pelisalacarta.core.config temp path = "+get_temp_file("test")
+print "streamondemand.core.config runtime path = "+get_runtime_path()
+print "streamondemand.core.config data path = "+get_data_path()
+print "streamondemand.core.config temp path = "+get_temp_file("test")
