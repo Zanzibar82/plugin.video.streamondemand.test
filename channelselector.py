@@ -226,7 +226,7 @@ def channels_list():
     itemlist.append( Item( title="[COLOR azure]FilmGratis.cc[/COLOR]"       , channel="filmgratiscc"           , language="IT"    , category="F"   , type="generic"  ,thumbnail="http://filmgratis.cc/wp-content/uploads/2014/06/logofilmgratis.png" ))
     itemlist.append( Item( title="[COLOR azure]FilmStream.org[/COLOR]"          , channel="filmstream"           , language="IT"    , category="F,S"   , type="generic"  ,thumbnail="http://i.imgur.com/kSIfR3l.jpg" ))
     itemlist.append( Item( title="[COLOR azure]FilmStream.to[/COLOR]"       , channel="filmstreampw"           , language="IT"    , category="F,S"   , type="generic"  ,thumbnail="http://filmstream.pw/templates/tvspirit/images/logo.png" ))
-    itemlist.append( Item( title="[COLOR azure]Film per tutti[/COLOR]"      , channel="filmpertutti"           , language="IT"    , category="B,F,S,A"    , type="generic"     ))
+    itemlist.append( Item( title="[COLOR azure]Film per tutti[/COLOR]"      , channel="filmpertutti"           , language="IT"    , category="F,S,A"    , type="generic"     ))
     itemlist.append( Item( title="[COLOR azure]Film Senza Limiti[/COLOR]"   , channel="filmsenzalimiti"       , language="IT"    , category="B,F"        , type="generic"     ))
     itemlist.append( Item( title="[COLOR azure]FilmSubito[/COLOR]"          , channel="filmsubitotv"           , language="IT"    , category="F,S,A"   , type="generic"  ,thumbnail="http://i.imgur.com/4x1V7dZ.png" ))
     itemlist.append( Item( title="[COLOR azure]Foxycinema[/COLOR]"          , channel="foxycinema"           , language="IT"    , category="F,S,A"   , type="generic"  ,thumbnail="http://www.foxycinema.org/images/grafica_di_struttura/home/logo/header.png" ))
@@ -248,6 +248,7 @@ def channels_list():
     itemlist.append( Item( title="[COLOR azure]Serie TV Sub ITA[/COLOR]"    , channel="serietvsubita"         , language="IT" , category="S"        , type="generic" , extra="Series"  ,thumbnail="https://scontent-ams2-1.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/1904147_604097543011368_1936085642_n.png?oh=8f63f742f9340428c8297d185873e21f&oe=561D7A0F" ))
     itemlist.append( Item( title="[COLOR azure]StreamBlog[/COLOR]"    , channel="streamblog"         , language="IT" , category="S,F,A"        , type="generic" , extra="Series"  ,thumbnail="http://www.streamblog.tv/templates/Smotrikino/images/logo.png" ))
     itemlist.append( Item( title="[COLOR azure]Streaming01[/COLOR]"    , channel="streaming01"         , language="IT" , category="B,F"        , type="generic" , extra="Series"  ,thumbnail="http://www.streaming01.com/templates/movie-groovie/images/logo.png" ))
+    itemlist.append( Item( title="[COLOR azure]Streaminfilmit[/COLOR]"    , channel="streamingfilmit"         , language="IT" , category="F"        , type="generic" , extra="Series"  ,thumbnail="http://www.streamingfilmit.com/wp-content/uploads/2015/05/bluepress11.png" ))
     itemlist.append( Item( title="[COLOR azure]Tantifilm[/COLOR]"        , channel="tantifilm"       , language="IT"    , category="B,F"       , type="generic"     ,thumbnail="http://www.tantifilm.net/wp-content/themes/smashingMultiMediaBrown/images/logo.png"))
 
     return itemlist
