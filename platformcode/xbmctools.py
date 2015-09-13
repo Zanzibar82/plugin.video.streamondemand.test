@@ -285,7 +285,7 @@ def play_video(channel="",server="",url="",category="",title="", thumbnail="",pl
             else:
                 resultado = advertencia.ok( "No puedes ver ese vídeo porque...",motivo,url)
         else:
-            resultado = advertencia.ok( "No puedes ver ese vídeo porque...","El servidor donde está alojado no está","soportado en pelisalacarta todavía",url)
+            resultado = advertencia.ok( "No puedes ver ese vídeo porque...","El servidor donde está alojado no está","soportado en streamondemand todavía",url)
 
         if channel=="favoritos": 
             opciones.append(config.get_localized_string(30154)) # "Quitar de favoritos"
@@ -355,7 +355,7 @@ def play_video(channel="",server="",url="",category="",title="", thumbnail="",pl
         if Serie!="":
             package_name = Serie
         else:
-            package_name = "pelisalacarta"
+            package_name = "streamondemand"
 
         from core import pyload_client
         pyload_client.download(url=url,package_name=package_name)
@@ -818,7 +818,7 @@ def playstrm(params,url,category):
     from platformcode.subtitletools import saveSubtitleName
     item = Item(title=title,show=serie)
     saveSubtitleName(item)
-    play_video("Biblioteca pelisalacarta",server,url,category,title,thumbnail,plot,strmfile=True,Serie=serie,subtitle=subtitle)
+    play_video("Biblioteca streamondemand",server,url,category,title,thumbnail,plot,strmfile=True,Serie=serie,subtitle=subtitle)
 
 def renderItems(itemlist, params, url, category, isPlayable='false'):
     
@@ -927,4 +927,4 @@ def alert_no_puedes_ver_video(server,url,motivo):
         else:
             resultado = advertencia.ok( "No puedes ver ese vídeo porque...",motivo,url)
     else:
-        resultado = advertencia.ok( "No puedes ver ese vídeo porque...","El servidor donde está alojado no está","soportado en pelisalacarta todavía",url)
+        resultado = advertencia.ok( "No puedes ver ese vídeo porque...","El servidor donde está alojado no está","soportado en streamondemand todavía",url)
