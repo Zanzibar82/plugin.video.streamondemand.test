@@ -5,10 +5,10 @@
     <language>it</language>
     <update_url>https://raw.githubusercontent.com/Zanzibar82/plugin.video.streamondemand/master/channels/documentaristreaming.py</update_url>
     <active>true</active>
-    <include_in_global_search>true</include_in_global_search>
-    <version>4</version>
+    <include_in_global_search>false</include_in_global_search>
+    <version>5</version>
     <adult>false</version>
-    <date>28/08/2015</date>
+    <date>13/09/2015</date>
     <changes>Prima versione di Pelisalacarta 4</changes>
     <categories>
         <category>Documentaries</category>
