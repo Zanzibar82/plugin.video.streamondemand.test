@@ -71,7 +71,7 @@ def sottomenu( item ):
 
     for scrapedurl, scrapedtitle in matches:
 
-        itemlist.append( Item( channel=__channel__, action="fichas", title="[COLOR azure]" + scrapedtitle + "[/COLOR]", url=scrapedurl ) )
+        itemlist.append( Item( channel=__channel__, action="fichas", title=scrapedtitle, url=scrapedurl ) )
 
     ## Elimina 'Serie TV' de la lista de 'sottomenu'
     itemlist.pop(0)
@@ -92,7 +92,7 @@ def fichas( item ):
 
     for scrapedtitle, scrapedthumbnail, scrapedurl in matches:
 
-        itemlist.append( Item( channel=__channel__, action="episodios", title="[COLOR azure]" + scrapedtitle + "[/COLOR]", fulltitle=scrapedtitle, url=scrapedurl, show=scrapedtitle, thumbnail=scrapedthumbnail ) )
+        itemlist.append( Item( channel=__channel__, action="episodios", title=scrapedtitle, fulltitle=scrapedtitle, url=scrapedurl, show=scrapedtitle, thumbnail=scrapedthumbnail ) )
 
     #<div class='wp-pagenavi'><span class='current'>1</span><a rel='nofollow' class='page larger' href='http://www.seriehd.org/serie-tv-streaming/page/2/'>2</a></div></div></div>
     next_page = scrapertools.find_single_match( data, "<span class='current'>\d+</span><a rel='nofollow' class='page larger' href='([^']+)'>\d+</a>" )
@@ -130,6 +130,10 @@ def episodios(item):
 
             itemlist.append( Item( channel=__channel__, action="findvideos", title=title, url=url, fulltitle=item.title, show=item.title ) )
 
+    if config.get_library_support():
+        itemlist.append( Item(channel=__channel__, title=item.title, url=item.url, action="add_serie_to_library", extra="episodios", show=item.show) )
+        itemlist.append( Item(channel=item.channel, title="Descargar todos los episodios de la serie", url=item.url, action="download_all_episodes", extra="episodios", show=item.show) )			
+			
     return itemlist
 
 def findvideos( item ):
