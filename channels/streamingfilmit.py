@@ -51,6 +51,8 @@ def categorias(item):
     for scrapedurl,scrapedtitle,scrapedtot in matches:
         scrapedplot = ""
         scrapedthumbnail = ""
+        scrapedtitle=scrapertools.decodeHtmlentities(scrapedtitle.replace("Animazione",""))
+        scrapedurl=scrapertools.decodeHtmlentities(scrapedurl.replace("http://www.streamingfilmit.com/category/animazione/",""))
         if (DEBUG): logger.info("title=["+scrapedtitle+"], url=["+scrapedurl+"]")
         itemlist.append( Item(channel=__channel__, action="pelicat", title="[COLOR azure]"+scrapedtitle+"[/COLOR][COLOR gray]" +scrapedtot+"[/COLOR]" , url=scrapedurl , thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png", folder=True) )
 
@@ -133,7 +135,7 @@ def pelicat(item):
         response = urllib2.urlopen(scrapedurl)
         html = response.read()
         start = html.find("<div id=\"detay-aciklama\">")
-        end = html.find("<table>", start)
+        end = html.find("</p>", start)
         scrapedplot = html[start:end]
         scrapedplot = re.sub(r'<[^>]*>', '', scrapedplot)
         scrapedplot = scrapertools.decodeHtmlentities(scrapedplot)
