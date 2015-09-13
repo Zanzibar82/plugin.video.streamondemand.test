@@ -421,5 +421,5 @@ def youtubeplay(params,url,category):
     
 def alertaerror():
     ventana = xbmcgui.Dialog()
-    ok= ventana.ok ("Plugin Pelisalacarta", "Uuppss...la calidad elegida en configuracion",'no esta disponible o es muy baja',"elijá otra calidad distinta y vuelva a probar")
+    ok= ventana.ok ("Plugin streamondemand", "Uuppss...la calidad elegida en configuracion",'no esta disponible o es muy baja',"elijá otra calidad distinta y vuelva a probar")
 
