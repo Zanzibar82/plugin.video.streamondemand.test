@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
 # streamondemand.- XBMC Plugin
-# Canal para piratestreaming
+# Canal para cinemagratis
 # http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
@@ -83,14 +83,14 @@ def peliculas(item):
     scrapertools.printMatches(matches)
 
     for scrapedurl,scrapedthumbnail,scrapedtitle in matches:
-        response = urllib2.urlopen(scrapedurl)
-        html = response.read()
-        start = html.find("<span style=\"font-family: Arial, Helvetica, sans-serif;\">")
-        end = html.find("</font></a><br />", start)
-        scrapedplot = html[start:end]
-        scrapedplot = re.sub(r'<[^>]*>', '', scrapedplot)
-        scrapedplot = scrapertools.decodeHtmlentities(scrapedplot)
-        #scrapedplot = ""
+        #response = urllib2.urlopen(scrapedurl)
+        #html = response.read()
+        #start = html.find("<div class=\"filmicerik\">")
+        #end = html.find("</font></a><br />", start)
+        #scrapedplot = html[start:end]
+        #scrapedplot = re.sub(r'<[^>]*>', '', scrapedplot)
+        #scrapedplot = scrapertools.decodeHtmlentities(scrapedplot)
+        scrapedplot = ""
         scrapedtitle=scrapertools.decodeHtmlentities(scrapedtitle.replace("streaming",""))
         if (DEBUG): logger.info("title=["+scrapedtitle+"], url=["+scrapedurl+"], thumbnail=["+scrapedthumbnail+"]")
         itemlist.append( Item(channel=__channel__, action="findvideos", title="[COLOR azure]"+scrapedtitle+"[/COLOR]" , url=scrapedurl , thumbnail=scrapedthumbnail , plot=scrapedplot , folder=True) )
