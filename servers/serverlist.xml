@@ -832,8 +832,8 @@
     <id>servertools</id>
     <update_url>https://raw.githubusercontent.com/Zanzibar82/plugin.video.streamondemand/master/servers/servertools.py</update_url>
     <active>true</active>
-    <version>1</version>
-    <date>12/09/2015</date>
+    <version>2</version>
+    <date>13/09/2015</date>
     <changes>Prima versione di Pelisalacarta 4</changes>
 </server>
 
@@ -915,6 +915,15 @@
     <active>true</active>
     <version>1</version>
     <date>12/09/2015</date>
+    <changes>Prima versione di Pelisalacarta 4</changes>
+</server>
+
+<server>
+    <id>streamingfilmit</id>
+    <update_url>https://raw.githubusercontent.com/Zanzibar82/plugin.video.streamondemand/master/servers/streamingfilmit.py</update_url>
+    <active>true</active>
+    <version>1</version>
+    <date>13/09/2015</date>
     <changes>Prima versione di Pelisalacarta 4</changes>
 </server>
 
