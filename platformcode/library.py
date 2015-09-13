@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
+# streamondemand - XBMC Plugin
 # Herramientas de integración en Librería
 # http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 # Autor: jurrabi
@@ -132,7 +132,7 @@ def savelibrary(titulo="",url="",thumbnail="",server="",plot="",canal="",categor
 # Eliminación de plot y thumnail
     addon_name = sys.argv[ 0 ]
     if addon_name.strip()=="":
-        addon_name="plugin://plugin.video.pelisalacarta/"
+        addon_name="plugin://plugin.video.streamondemand/"
     itemurl = '%s?channel=%s&action=%s&category=%s&title=%s&url=%s&thumbnail=%s&plot=%s&server=%s&Serie=%s&subtitle=%s&extra=%s' % ( addon_name , canal , accion , urllib.quote_plus( category ) , urllib.quote_plus( titulo ) , urllib.quote_plus( url ) , "" , "" , server , Serie , urllib.quote_plus(subtitle) , urllib.quote_plus(extra) )
     logger.info("[library.py] savelibrary fullfilename=%s , itemurl=%s" % (fullfilename,itemurl))
 
@@ -172,13 +172,13 @@ def update(total,errores=0, nuevos=0, serie="No indicada"):
     if nuevos > 0:
         logger.info("[library.py] update - nuevos")
         if errores == 0:
-            actualizar = advertencia.yesno('pelisalacarta' , texto ,'¿Deseas que actualice ahora la Biblioteca?')
+            actualizar = advertencia.yesno('streamondemand' , texto ,'¿Deseas que actualice ahora la Biblioteca?')
         else:  # Si hubo errores muestra una línea adicional en la pregunta de actualizar biblioteca
             if errores == 1:
                 texto2 = '(No se pudo añadir 1 episodio)'
             else:
                 texto2 = '(No se pudieron añadir '+str(errores)+' episodios)'
-            actualizar = advertencia.yesno('pelisalacarta' , texto , texto2 , '¿Deseas que actualice ahora la Biblioteca?')
+            actualizar = advertencia.yesno('streamondemand' , texto , texto2 , '¿Deseas que actualice ahora la Biblioteca?')
     else: #No hay episodios nuevos -> no actualizar
         logger.info("[library.py] update - no nuevos")
         if errores == 0:
@@ -187,7 +187,7 @@ def update(total,errores=0, nuevos=0, serie="No indicada"):
             texto2 = '(No se pudo añadir 1 episodio)'
         else:
             texto2 = '(No se pudieron añadir '+str(errores)+' episodios)'
-        #advertencia.ok('pelisalacarta',texto,texto2)
+        #advertencia.ok('streamondemand',texto,texto2)
         actualizar = False
     
     if actualizar:
@@ -201,7 +201,7 @@ def update(total,errores=0, nuevos=0, serie="No indicada"):
 def MonitorSerie ( canal, accion, server, url, serie): 
     ''' Añade una serie a la lista de series a monitorizar.
     
-    Si se configura para que lo haga pelisalacarta arrancará un proceso al inicio de XBMC
+    Si se configura para que lo haga streamondemand arrancará un proceso al inicio de XBMC
     para monitorizar las series que se desee mediante una llamada a esta función.
     Los episodios nuevos que vayan apareciendo en la web del canal para la serie indicada
     se irán añdiendo a la biblioteca.
@@ -215,9 +215,9 @@ def fixStrmLibrary(path = LIBRARY_PATH):
     
     Este cambio es necesario con el paso a XBMC Dharma (10.5) donde las url de
     plugin cambiaron de:
-      plugin://video/pelisalacarta/
+      plugin://video/streamondemand/
     a: 
-      plugin://plugin.video.pelisalacarta/
+      plugin://plugin.video.streamondemand/
     dado que esto podría volver a pasar (en ciertos momentos se ha estado
     experimentando con urls del tipo addon://... hemos decidido crear esta función
     para arreglar los strm en cualquier momento.
