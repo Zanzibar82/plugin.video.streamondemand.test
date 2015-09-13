@@ -48,7 +48,7 @@ def find_videos(data):
     for match in matches:
         titulo = "[streamingfilmit]"
         url = "http://www."+match
-        #url = get_hops(init+match)
+        #url = get_hops(url)
         if url not in encontrados:
             logger.info("  url="+url)
             devuelve.append( [ titulo , url , 'streamingfilmit' ] )
