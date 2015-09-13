@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
+# streamondemand - XBMC Plugin
 # Canal para streamingfilmit
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand/
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
@@ -29,7 +29,7 @@ def isGeneric():
 
 
 def mainlist(item):
-    logger.info("pelisalacarta.streamingfilmit mainlist")
+    logger.info("streamondemand.streamingfilmit mainlist")
     itemlist = []
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Ultimi Film Inseriti[/COLOR]", action="peliculas", url="http://www.streamingfilmit.com/", thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"))
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film Per Categoria[/COLOR]", action="categorias", url="http://www.streamingfilmit.com/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
@@ -75,7 +75,7 @@ def search(item,texto):
 
 
 def peliculas(item):
-    logger.info("pelisalacarta.streamingfilmit peliculas")
+    logger.info("streamondemand.streamingfilmit peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -115,7 +115,7 @@ def peliculas(item):
 
 
 def pelicat(item):
-    logger.info("pelisalacarta.streamingfilmit pelicat")
+    logger.info("streamondemand.streamingfilmit pelicat")
     itemlist = []
 
     # Descarga la pagina
@@ -162,7 +162,7 @@ def pelicat(item):
 
 
 def findvideos(item):
-    logger.info("pelisalacarta.streamingfilmit findvideos")
+    logger.info("streamondemand.streamingfilmit findvideos")
 
     itemlist = []
 
@@ -187,7 +187,7 @@ def findvideos(item):
 
 
 def play(item):
-    logger.info("pelisalacarta.streamingfilmit play")
+    logger.info("streamondemand.streamingfilmit play")
 
     data = scrapertools.cache_page(item.url)
     data = scrapertools.decodeHtmlentities(data).replace('http://cineblog01.pw', 'http://k4pp4.pw')
