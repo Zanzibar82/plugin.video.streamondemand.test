@@ -45,8 +45,8 @@ LOCAL_FILE = os.path.join( ROOT_DIR , "plugin.video."+config.PLUGIN_NAME+"-maste
 try:
     # Añadida a la opcion : si plataforma xbmcdharma es "True", no debe ser con la plataforma de la xbox
     # porque seria un falso "True", ya que el xbmc en las xbox no son dharma por lo tanto no existen los addons
-    logger.info("pelisalacarta.core.updater get_platform="+config.get_platform())
-    logger.info("pelisalacarta.core.updater get_system_platform="+config.get_system_platform())
+    logger.info("streamondemand.core.updater get_platform="+config.get_platform())
+    logger.info("streamondemand.core.updater get_system_platform="+config.get_system_platform())
     if config.get_platform()=="kodi-isengard":
         import xbmc
         REMOTE_FILE = "https://raw.githubusercontent.com/Zanzibar82/plugin.video.streamondemand/master/"
@@ -84,17 +84,17 @@ except:
     DESTINATION_FOLDER = xbmc.translatePath( "special://home/addons")
 
 def checkforupdates(plugin_mode=True):
-    logger.info("pelisalacarta.core.updater checkforupdates")
+    logger.info("streamondemand.core.updater checkforupdates")
 
     # Descarga el fichero con la versión en la web
-    logger.info("pelisalacarta.core.updater Verificando actualizaciones...")
-    logger.info("pelisalacarta.core.updater Version remota: "+REMOTE_VERSION_FILE)
+    logger.info("streamondemand.core.updater Verificando actualizaciones...")
+    logger.info("streamondemand.core.updater Version remota: "+REMOTE_VERSION_FILE)
     data = scrapertools.cachePage( REMOTE_VERSION_FILE )
 
     '''   
     <?xml version="1.0" encoding="utf-8" standalone="yes"?>
     <version>
-            <name>pelisalacarta</name>
+            <name>streamondemand</name>
             <tag>4.0     </tag>
             <version>4000</tag>
             <date>20/03/2015</date>
@@ -104,11 +104,11 @@ def checkforupdates(plugin_mode=True):
 
     version_publicada = scrapertools.find_single_match(data,"<version>([^<]+)</version>").strip()
     tag_publicada = scrapertools.find_single_match(data,"<tag>([^<]+)</tag>").strip()
-    logger.info("pelisalacarta.core.updater version remota="+tag_publicada+" "+version_publicada)
+    logger.info("streamondemand.core.updater version remota="+tag_publicada+" "+version_publicada)
    
     # Lee el fichero con la versión instalada
     localFileName = LOCAL_VERSION_FILE
-    logger.info("pelisalacarta.core.updater fichero local version: "+localFileName)
+    logger.info("streamondemand.core.updater fichero local version: "+localFileName)
     infile = open( localFileName )
     data = infile.read()
     infile.close();
@@ -116,7 +116,7 @@ def checkforupdates(plugin_mode=True):
 
     version_local = scrapertools.find_single_match(data,"<version>([^<]+)</version>").strip()
     tag_local = scrapertools.find_single_match(data,"<tag>([^<]+)</tag>").strip()
-    logger.info("pelisalacarta.core.updater version local="+tag_local+" "+version_local)
+    logger.info("streamondemand.core.updater version local="+tag_local+" "+version_local)
 
     try:
         numero_version_publicada = int(version_publicada)
@@ -172,7 +172,7 @@ def checkforupdates(plugin_mode=True):
    
         if plugin_mode:
    
-            logger.info("pelisalacarta.core.updater actualizacion disponible")
+            logger.info("streamondemand.core.updater actualizacion disponible")
            
             # Añade al listado de XBMC
             import xbmcgui
@@ -205,12 +205,12 @@ def checkforupdates(plugin_mode=True):
     '''
 def update(params):
     # Descarga el ZIP
-    logger.info("pelisalacarta.core.updater update")
+    logger.info("streamondemand.core.updater update")
     remotefilename = "https://github.com/Zanzibar82/plugin.video.streamondemand/archive/master.zip"
     localfilename = LOCAL_FILE
-    logger.info("pelisalacarta.core.updater remotefilename=%s" % remotefilename)
-    logger.info("pelisalacarta.core.updater localfilename=%s" % localfilename)
-    logger.info("pelisalacarta.core.updater descarga fichero...")
+    logger.info("streamondemand.core.updater remotefilename=%s" % remotefilename)
+    logger.info("streamondemand.core.updater localfilename=%s" % localfilename)
+    logger.info("streamondemand.core.updater descarga fichero...")
     inicio = time.clock()
    
     #urllib.urlretrieve(remotefilename,localfilename)
@@ -218,20 +218,20 @@ def update(params):
     downloadtools.downloadfile(remotefilename, localfilename, continuar=False)
    
     fin = time.clock()
-    logger.info("pelisalacarta.core.updater Descargado en %d segundos " % (fin-inicio+1))
+    logger.info("streamondemand.core.updater Descargado en %d segundos " % (fin-inicio+1))
    
     # Lo descomprime
-    logger.info("pelisalacarta.core.updater descomprime fichero...")
+    logger.info("streamondemand.core.updater descomprime fichero...")
     import ziptools
     unzipper = ziptools.ziptools()
     destpathname = DESTINATION_FOLDER
-    logger.info("pelisalacarta.core.updater destpathname=%s" % destpathname)
+    logger.info("streamondemand.core.updater destpathname=%s" % destpathname)
     unzipper.extract(localfilename,destpathname)
    
     # Borra el zip descargado
-    logger.info("pelisalacarta.core.updater borra fichero...")
+    logger.info("streamondemand.core.updater borra fichero...")
     os.remove(localfilename)
-    logger.info("pelisalacarta.core.updater ...fichero borrado")
+    logger.info("streamondemand.core.updater ...fichero borrado")
 
 def get_channel_remote_url(channel_name):
     _remote_channel_url_ = "https://raw.githubusercontent.com/Zanzibar82/plugin.video.streamondemand/master/"
@@ -240,8 +240,8 @@ def get_channel_remote_url(channel_name):
     remote_channel_url = _remote_channel_url_+channel_name+".py"
     remote_version_url = _remote_channel_url_+channel_name+".xml"
 
-    logger.info("pelisalacarta.core.updater remote_channel_url="+remote_channel_url)
-    logger.info("pelisalacarta.core.updater remote_version_url="+remote_version_url)
+    logger.info("streamondemand.core.updater remote_channel_url="+remote_channel_url)
+    logger.info("streamondemand.core.updater remote_version_url="+remote_version_url)
    
     return remote_channel_url , remote_version_url
 
@@ -256,14 +256,14 @@ def get_channel_local_path(channel_name):
         local_version_path = os.path.join( config.get_runtime_path() , channel_name+".xml" )
         local_compiled_path = os.path.join( config.get_runtime_path() , channel_name+".pyo" )
 
-    logger.info("pelisalacarta.core.updater local_channel_path="+local_channel_path)
-    logger.info("pelisalacarta.core.updater local_version_path="+local_version_path)
-    logger.info("pelisalacarta.core.updater local_compiled_path="+local_compiled_path)
+    logger.info("streamondemand.core.updater local_channel_path="+local_channel_path)
+    logger.info("streamondemand.core.updater local_version_path="+local_version_path)
+    logger.info("streamondemand.core.updater local_compiled_path="+local_compiled_path)
    
     return local_channel_path , local_version_path , local_compiled_path
 
 def updatechannel(channel_name):
-    logger.info("pelisalacarta.core.updater updatechannel('"+channel_name+"')")
+    logger.info("streamondemand.core.updater updatechannel('"+channel_name+"')")
    
     # Canal remoto
     remote_channel_url , remote_version_url = get_channel_remote_url(channel_name)
@@ -277,7 +277,7 @@ def updatechannel(channel_name):
     # Version remota
     try:
         data = scrapertools.cachePage( remote_version_url )
-        logger.info("pelisalacarta.core.updater remote_data="+data)
+        logger.info("streamondemand.core.updater remote_data="+data)
         if "<tag>" in data: patronvideos  = '<tag>([^<]+)</tag>'
         elif "<version>" in data: patronvideos  = '<version>([^<]+)</version>'
         matches = re.compile(patronvideos,re.DOTALL).findall(data)
@@ -285,14 +285,14 @@ def updatechannel(channel_name):
     except:
         remote_version = 0
 
-    logger.info("pelisalacarta.core.updater remote_version=%d" % remote_version)
+    logger.info("streamondemand.core.updater remote_version=%d" % remote_version)
 
     # Version local
     if os.path.exists( local_version_path ):
         infile = open( local_version_path )
         data = infile.read()
         infile.close();
-        logger.info("pelisalacarta.core.updater local_data="+data)
+        logger.info("streamondemand.core.updater local_data="+data)
         if "<tag>" in data: patronvideos  = '<tag>([^<]+)</tag>'
         elif "<version>" in data: patronvideos  = '<version>([^<]+)</version>'
         matches = re.compile(patronvideos,re.DOTALL).findall(data)
@@ -300,19 +300,19 @@ def updatechannel(channel_name):
     else:
         local_version = 0
    
-    logger.info("pelisalacarta.core.updater local_version=%d" % local_version)
+    logger.info("streamondemand.core.updater local_version=%d" % local_version)
    
     # Comprueba si ha cambiado
     updated = remote_version > local_version
 
     if updated:
-        logger.info("pelisalacarta.core.updater updated")
+        logger.info("streamondemand.core.updater updated")
         download_channel(channel_name)
 
     return updated
 
 def download_channel(channel_name):
-    logger.info("pelisalacarta.core.updater download_channel('"+channel_name+"')")
+    logger.info("streamondemand.core.updater download_channel('"+channel_name+"')")
     # Canal remoto
     remote_channel_url , remote_version_url = get_channel_remote_url(channel_name)
    
@@ -326,9 +326,9 @@ def download_channel(channel_name):
         outfile.write(updated_channel_data)
         outfile.flush()
         outfile.close()
-        logger.info("pelisalacarta.core.updater Grabado a " + local_channel_path)
+        logger.info("streamondemand.core.updater Grabado a " + local_channel_path)
     except:
-        logger.info("pelisalacarta.core.updater Error al grabar " + local_channel_path)
+        logger.info("streamondemand.core.updater Error al grabar " + local_channel_path)
         import sys
         for line in sys.exc_info():
             logger.error( "%s" % line )
@@ -340,7 +340,7 @@ def download_channel(channel_name):
         outfile.write(updated_version_data)
         outfile.flush()
         outfile.close()
-        logger.info("pelisalacarta.core.updater Grabado a " + local_version_path)
+        logger.info("streamondemand.core.updater Grabado a " + local_version_path)
     except:
         import sys
         for line in sys.exc_info():
