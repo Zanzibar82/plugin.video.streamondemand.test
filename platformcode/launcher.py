@@ -13,14 +13,14 @@ from core import config
 from core import scrapertools
 
 def run():
-    logger.info("pelisalacarta.platformcode.launcher run")
+    logger.info("streamondemand.platformcode.launcher run")
     
     # Test if all the required directories are created
     config.verify_directories_created()
     
     # Extract parameters from sys.argv
     params, fanart, channel_name, title, fulltitle, url, thumbnail, plot, action, server, extra, subtitle, viewmode, category, show, password = extract_parameters()
-    logger.info("pelisalacarta.platformcode.launcher fanart=%s, channel_name=%s, title=%s, fulltitle=%s, url=%s, thumbnail=%s, plot=%s, action=%s, server=%s, extra=%s, subtitle=%s, category=%s, show=%s, password=%s" % (fanart, channel_name, title, fulltitle, url, thumbnail, plot, action, server, extra, subtitle, category, show, password))
+    logger.info("streamondemand.platformcode.launcher fanart=%s, channel_name=%s, title=%s, fulltitle=%s, url=%s, thumbnail=%s, plot=%s, action=%s, server=%s, extra=%s, subtitle=%s, category=%s, show=%s, password=%s" % (fanart, channel_name, title, fulltitle, url, thumbnail, plot, action, server, extra, subtitle, category, show, password))
 
     try:
         # Accion por defecto - elegir canal
@@ -53,7 +53,7 @@ def run():
                 from core import updater
                 updater.update(params)
             except ImportError:
-                logger.info("pelisalacarta.platformcode.launcher Actualizacion automática desactivada")
+                logger.info("streamondemand.platformcode.launcher Actualizacion automática desactivada")
 
             #import channelselector as plugin
             #plugin.listchannels(params, url, category)
@@ -92,8 +92,8 @@ def run():
             # La acción puede estar en el core, o ser un canal regular. El buscador es un canal especial que está en pelisalacarta
             regular_channel_path = os.path.join( config.get_runtime_path() , 'channels' , channel_name+".py" )
             core_channel_path = os.path.join( config.get_runtime_path(), 'core' , channel_name+".py" )
-            logger.info("pelisalacarta.platformcode.launcher regular_channel_path=%s" % regular_channel_path)
-            logger.info("pelisalacarta.platformcode.launcher core_channel_path=%s" % core_channel_path)
+            logger.info("streamondemand.platformcode.launcher regular_channel_path=%s" % regular_channel_path)
+            logger.info("streamondemand.platformcode.launcher core_channel_path=%s" % core_channel_path)
 
             if channel_name=="personal" or channel_name=="personal2" or channel_name=="personal3" or channel_name=="personal4" or channel_name=="personal5":
                 import channels.personal as channel
@@ -102,7 +102,7 @@ def run():
             elif os.path.exists( core_channel_path ):
                 exec "from core import "+channel_name+" as channel"
 
-            logger.info("pelisalacarta.platformcode.launcher running channel %s %s" % (channel.__name__ , channel.__file__))
+            logger.info("streamondemand.platformcode.launcher running channel %s %s" % (channel.__name__ , channel.__file__))
 
             generico = False
             # Esto lo he puesto asi porque el buscador puede ser generico o normal, esto estará asi hasta que todos los canales sean genericos 
@@ -115,20 +115,20 @@ def run():
                     generico = False
 
             if not generico:
-                logger.info("pelisalacarta.platformcode.launcher xbmc native channel")
+                logger.info("streamondemand.platformcode.launcher xbmc native channel")
                 if (action=="strm"):
                     from platformcode import xbmctools
                     xbmctools.playstrm(params, url, category)
                 else:
                     exec "channel."+action+"(params, url, category)"
             else:            
-                logger.info("pelisalacarta.platformcode.launcher multiplatform channel")
+                logger.info("streamondemand.platformcode.launcher multiplatform channel")
                 from core.item import Item
                 item = Item(channel=channel_name, title=title , fulltitle=fulltitle, url=url, thumbnail=thumbnail , plot=plot , server=server, category=category, extra=extra, subtitle=subtitle, viewmode=viewmode, show=show, password=password, fanart=fanart)
                 
                 '''
                 if item.subtitle!="":
-                    logger.info("pelisalacarta.platformcode.launcher Downloading subtitle file "+item.subtitle)
+                    logger.info("streamondemand.platformcode.launcher Downloading subtitle file "+item.subtitle)
                     from core import downloadtools
                     
                     ficherosubtitulo = os.path.join( config.get_data_path() , "subtitulo.srt" )
@@ -138,15 +138,15 @@ def run():
                     downloadtools.downloadfile(item.subtitle, ficherosubtitulo )
                     config.set_setting("subtitulo","true")
                 else:
-                    logger.info("pelisalacarta.platformcode.launcher No subtitle")
+                    logger.info("streamondemand.platformcode.launcher No subtitle")
                 '''
                 from platformcode import xbmctools
 
                 if action=="play":
-                    logger.info("pelisalacarta.platformcode.launcher play")
+                    logger.info("streamondemand.platformcode.launcher play")
                     # Si el canal tiene una acción "play" tiene prioridad
                     if hasattr(channel, 'play'):
-                        logger.info("pelisalacarta.platformcode.launcher executing channel 'play' method")
+                        logger.info("streamondemand.platformcode.launcher executing channel 'play' method")
                         itemlist = channel.play(item)
                         if len(itemlist)>0:
                             item = itemlist[0]
@@ -156,11 +156,11 @@ def run():
                             ventana_error = xbmcgui.Dialog()
                             ok = ventana_error.ok ("plugin", "Niente da riprodurre")
                     else:
-                        logger.info("pelisalacarta.platformcode.launcher no channel 'play' method, executing core method")
+                        logger.info("streamondemand.platformcode.launcher no channel 'play' method, executing core method")
                         xbmctools.play_video(channel=channel_name, server=item.server, url=item.url, category=item.category, title=item.title, thumbnail=item.thumbnail, plot=item.plot, extra=item.extra, subtitle=item.subtitle, video_password = item.password, fulltitle=item.fulltitle, Serie=item.show)
 
                 elif action=="strm_detail" or action=="play_from_library":
-                    logger.info("pelisalacarta.platformcode.launcher play_from_library")
+                    logger.info("streamondemand.platformcode.launcher play_from_library")
 
                     fulltitle = item.show + " " + item.title
                     elegido = Item(url="")                    
@@ -205,13 +205,13 @@ def run():
                     xbmctools.play_video(strmfile=True, channel=item.channel, server=item.server, url=item.url, category=item.category, title=item.title, thumbnail=item.thumbnail, plot=item.plot, extra=item.extra, subtitle=item.subtitle, video_password = item.password, fulltitle=fulltitle)
 
                 elif action=="add_pelicula_to_library":
-                    logger.info("pelisalacarta.platformcode.launcher add_pelicula_to_library")
+                    logger.info("streamondemand.platformcode.launcher add_pelicula_to_library")
                     from platformcode import library
                     # Obtiene el listado desde el que se llamó
                     library.savelibrary( titulo=item.fulltitle , url=item.url , thumbnail=item.thumbnail , server=item.server , plot=item.plot , canal=item.channel , category="Cine" , Serie=item.show.strip() , verbose=False, accion="play_from_library", pedirnombre=False, subtitle=item.subtitle )
 
                 elif action=="add_serie_to_library":
-                    logger.info("pelisalacarta.platformcode.launcher add_serie_to_library, show=#"+item.show+"#")
+                    logger.info("streamondemand.platformcode.launcher add_serie_to_library, show=#"+item.show+"#")
                     from platformcode import library
                     import xbmcgui
                 
@@ -237,7 +237,7 @@ def run():
                     for item in itemlist:
                         i = i + 1
                         pDialog.update(i*100/totalepisodes, 'Añadiendo episodio...',item.title)
-                        logger.info("pelisalacarta.platformcode.launcher add_serie_to_library, title="+item.title)
+                        logger.info("streamondemand.platformcode.launcher add_serie_to_library, title="+item.title)
                         if (pDialog.iscanceled()):
                             return
                 
@@ -250,7 +250,7 @@ def run():
                             import sys
                             for line in sys.exc_info():
                                 logger.error( "%s" % line )
-                            logger.info("pelisalacarta.platformcode.launcher Error al grabar el archivo "+item.title)
+                            logger.info("streamondemand.platformcode.launcher Error al grabar el archivo "+item.title)
                             errores = errores + 1
                         
                     pDialog.close()
@@ -290,7 +290,7 @@ def run():
                     download_all_episodes(item,channel)
 
                 elif action=="search":
-                    logger.info("pelisalacarta.platformcode.launcher search")
+                    logger.info("streamondemand.platformcode.launcher search")
                     import xbmc
                     keyboard = xbmc.Keyboard("")
                     keyboard.doModal()
@@ -303,7 +303,7 @@ def run():
                     xbmctools.renderItems(itemlist, params, url, category)
 
                 else:
-                    logger.info("pelisalacarta.platformcode.launcher executing channel '"+action+"' method")
+                    logger.info("streamondemand.platformcode.launcher executing channel '"+action+"' method")
                     if action!="findvideos":
                         exec "itemlist = channel."+action+"(item)"
                             
@@ -316,7 +316,7 @@ def run():
                             exec "itemlist = channel."+action+"(item)"
                         # Si no funciona, lanza el método genérico para detectar vídeos
                         else:
-                            logger.info("pelisalacarta.platformcode.launcher no channel 'findvideos' method, executing core method")
+                            logger.info("streamondemand.platformcode.launcher no channel 'findvideos' method, executing core method")
                             from servers import servertools
                             itemlist = servertools.find_video_items(item)
 
@@ -384,16 +384,16 @@ def get_params():
 
 # Extract parameters from sys.argv
 def extract_parameters():
-    logger.info("pelisalacarta.platformcode.launcher extract_parameters")
+    logger.info("streamondemand.platformcode.launcher extract_parameters")
     #Imprime en el log los parámetros de entrada
-    logger.info("pelisalacarta.platformcode.launcher sys.argv=%s" % str(sys.argv))
+    logger.info("streamondemand.platformcode.launcher sys.argv=%s" % str(sys.argv))
     
     # Crea el diccionario de parametros
     #params = dict()
     #if len(sys.argv)>=2 and len(sys.argv[2])>0:
     #    params = dict(part.split('=') for part in sys.argv[ 2 ][ 1: ].split('&'))
     params = get_params()
-    logger.info("pelisalacarta.platformcode.launcher params=%s" % str(params))
+    logger.info("streamondemand.platformcode.launcher params=%s" % str(params))
 
     if (params.has_key("channel")):
         channel = urllib.unquote_plus( params.get("channel") )
@@ -503,7 +503,7 @@ def episodio_ya_descargado(show_title,episode_title):
     return False
 
 def download_all_episodes(item,channel,first_episode="",preferred_server="vidspot",filter_language=""):
-    logger.info("pelisalacarta.platformcode.launcher download_all_episodes, show="+item.show)
+    logger.info("streamondemand.platformcode.launcher download_all_episodes, show="+item.show)
     show_title = item.show
 
     # Obtiene el listado desde el que se llamó
@@ -534,9 +534,9 @@ def download_all_episodes(item,channel,first_episode="",preferred_server="vidspo
 
     for episode_item in episode_itemlist:
         try:
-            logger.info("pelisalacarta.platformcode.launcher download_all_episodes, episode="+episode_item.title)
+            logger.info("streamondemand.platformcode.launcher download_all_episodes, episode="+episode_item.title)
             episode_title = scrapertools.get_match(episode_item.title,"(\d+x\d+)")
-            logger.info("pelisalacarta.platformcode.launcher download_all_episodes, episode="+episode_title)
+            logger.info("streamondemand.platformcode.launcher download_all_episodes, episode="+episode_title)
         except:
             import traceback
             logger.info(traceback.format_exc())
@@ -594,7 +594,7 @@ def download_all_episodes(item,channel,first_episode="",preferred_server="vidspo
         mirrors_itemlist = new_mirror_itemlist_1 + new_mirror_itemlist_2 + new_mirror_itemlist_3 + new_mirror_itemlist_4 + new_mirror_itemlist_5 + new_mirror_itemlist_6
 
         for mirror_item in mirrors_itemlist:
-            logger.info("pelisalacarta.platformcode.launcher download_all_episodes, mirror="+mirror_item.title)
+            logger.info("streamondemand.platformcode.launcher download_all_episodes, mirror="+mirror_item.title)
 
             if "(Español)" in mirror_item.title:
                 idioma="(Español)"
@@ -612,11 +612,11 @@ def download_all_episodes(item,channel,first_episode="",preferred_server="vidspo
                 idioma="(Desconocido)"
                 codigo_idioma="desconocido"
 
-            logger.info("pelisalacarta.platformcode.launcher filter_language=#"+filter_language+"#, codigo_idioma=#"+codigo_idioma+"#")
+            logger.info("streamondemand.platformcode.launcher filter_language=#"+filter_language+"#, codigo_idioma=#"+codigo_idioma+"#")
             if filter_language=="" or (filter_language!="" and filter_language==codigo_idioma):
-                logger.info("pelisalacarta.platformcode.launcher download_all_episodes, downloading mirror")
+                logger.info("streamondemand.platformcode.launcher download_all_episodes, downloading mirror")
             else:
-                logger.info("pelisalacarta.platformcode.launcher language "+codigo_idioma+" filtered, skipping")
+                logger.info("streamondemand.platformcode.launcher language "+codigo_idioma+" filtered, skipping")
                 continue
 
             if hasattr(channel, 'play'):
@@ -632,13 +632,13 @@ def download_all_episodes(item,channel,first_episode="",preferred_server="vidspo
 
                 # Lo añade a la lista de descargas
                 if puedes:
-                    logger.info("pelisalacarta.platformcode.launcher download_all_episodes, downloading mirror started...")
+                    logger.info("streamondemand.platformcode.launcher download_all_episodes, downloading mirror started...")
                     # El vídeo de más calidad es el último
                     mediaurl = video_urls[len(video_urls)-1][1]
                     devuelve = downloadtools.downloadbest(video_urls,show_title+" "+episode_title+" "+idioma+" ["+video_item.server+"]",continuar=False)
 
                     if devuelve==0:
-                        logger.info("pelisalacarta.platformcode.launcher download_all_episodes, download ok")
+                        logger.info("streamondemand.platformcode.launcher download_all_episodes, download ok")
                         descargado = True
                         break
                     elif devuelve==-1:
@@ -650,12 +650,12 @@ def download_all_episodes(item,channel,first_episode="",preferred_server="vidspo
                             pass
                         return
                     else:
-                        logger.info("pelisalacarta.platformcode.launcher download_all_episodes, download error, try another mirror")
+                        logger.info("streamondemand.platformcode.launcher download_all_episodes, download error, try another mirror")
                         continue
 
                 else:
-                    logger.info("pelisalacarta.platformcode.launcher download_all_episodes, downloading mirror not available... trying next")
+                    logger.info("streamondemand.platformcode.launcher download_all_episodes, downloading mirror not available... trying next")
 
         if not descargado:
-            logger.info("pelisalacarta.platformcode.launcher download_all_episodes, EPISODIO NO DESCARGADO "+episode_title)
+            logger.info("streamondemand.platformcode.launcher download_all_episodes, EPISODIO NO DESCARGADO "+episode_title)
 
