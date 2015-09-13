@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
+# streamondemand - XBMC Plugin
 # Canal para darkstream
 # http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 #------------------------------------------------------------
@@ -27,7 +27,7 @@ def isGeneric():
     return True
 
 def mainlist(item):
-    logger.info("pelisalacarta.darkstream mainlist")
+    logger.info("streamondemand.darkstream mainlist")
     itemlist = []
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film per Registi[/COLOR]", action="cat_registi", url="http://www.darkstream.tv/elenco-registi/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film per Attori[/COLOR]", action="cat_attori", url="http://www.darkstream.tv/elenco-attori/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
@@ -39,7 +39,7 @@ def mainlist(item):
     return itemlist
 
 def cat_registi(item):
-    logger.info("pelisalacarta.darkstream cat_registi")
+    logger.info("streamondemand.darkstream cat_registi")
     itemlist = []
 
     # Descarga la pagina
@@ -59,7 +59,7 @@ def cat_registi(item):
     return itemlist
 
 def cat_attori(item):
-    logger.info("pelisalacarta.darkstream cat_attori")
+    logger.info("streamondemand.darkstream cat_attori")
     itemlist = []
 
     # Descarga la pagina
@@ -79,7 +79,7 @@ def cat_attori(item):
     return itemlist
 
 def cat_attrici(item):
-    logger.info("pelisalacarta.darkstream cat_attrici")
+    logger.info("streamondemand.darkstream cat_attrici")
     itemlist = []
 
     # Descarga la pagina
@@ -99,7 +99,7 @@ def cat_attrici(item):
     return itemlist
 
 def categorias(item):
-    logger.info("pelisalacarta.darkstream categorias")
+    logger.info("streamondemand.darkstream categorias")
     itemlist = []
 
     # Descarga la pagina
@@ -121,7 +121,7 @@ def categorias(item):
     return itemlist
 
 def cat_elenco(item):
-    logger.info("pelisalacarta.darkstream cat_elenco")
+    logger.info("streamondemand.darkstream cat_elenco")
     itemlist = []
 
     # Descarga la pagina
@@ -161,7 +161,7 @@ def search(item,texto):
         return []
 
 def peliculas(item):
-    logger.info("pelisalacarta.darkstream peliculas")
+    logger.info("streamondemand.darkstream peliculas")
     itemlist = []
 
     # Descarga la pagina
