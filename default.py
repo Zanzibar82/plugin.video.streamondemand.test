@@ -17,7 +17,7 @@ import sys
 from core import config
 from core import logger
 
-logger.info("pelisalacarta.default init...")
+logger.info("streamondemand.default init...")
 
 librerias = xbmc.translatePath( os.path.join( config.get_runtime_path(), 'lib' ) )
 sys.path.append (librerias)
