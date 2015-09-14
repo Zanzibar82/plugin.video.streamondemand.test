@@ -14,11 +14,11 @@ from core import config
 from core import jsunpack
 
 def test_video_exists( page_url ):
-    logger.info("pelisalacarta.servers.vidxtreme test_video_exists(page_url='%s')" % page_url)
+    logger.info("streamondemand.servers.vidxtreme test_video_exists(page_url='%s')" % page_url)
     return True,""
 
 def get_video_url( page_url , premium = False , user="" , password="", video_password="" ):
-    logger.info("pelisalacarta.servers.vidxtreme url="+page_url)
+    logger.info("streamondemand.servers.vidxtreme url="+page_url)
     if not "embed" in page_url:
         page_url = page_url.replace("http://www.vidxtreme.to/","http://www.vidxtreme.to/embed-") + ".html"
 
@@ -45,7 +45,7 @@ def find_videos(data):
     devuelve = []
 
     patronvideos  = 'vidxtreme.to/embed-([a-z0-9A-Z]+)'
-    logger.info("pelisalacarta.servers.vidxtreme find_videos #"+patronvideos+"#")
+    logger.info("streamondemand.servers.vidxtreme find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:
@@ -59,7 +59,7 @@ def find_videos(data):
             logger.info("  url duplicada="+url)
 
     patronvideos  = 'vidxtreme.to/([a-z0-9A-Z]+)'
-    logger.info("pelisalacarta.servers.vidxtreme find_videos #"+patronvideos+"#")
+    logger.info("streamondemand.servers.vidxtreme find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:

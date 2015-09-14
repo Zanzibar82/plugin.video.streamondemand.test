@@ -14,11 +14,11 @@ from core import config
 from core import jsunpack
 
 def test_video_exists( page_url ):
-    logger.info("pelisalacarta.servers.vidzi test_video_exists(page_url='%s')" % page_url)
+    logger.info("streamondemand.servers.vidzi test_video_exists(page_url='%s')" % page_url)
     return True,""
 
 def get_video_url( page_url , premium = False , user="" , password="", video_password="" ):
-    logger.info("pelisalacarta.servers.vidzi url="+page_url)
+    logger.info("streamondemand.servers.vidzi url="+page_url)
     if not "embed" in page_url:
       page_url = page_url.replace("http://vidzi.tv/","http://vidzi.tv/embed-") + ".html"
     
@@ -36,7 +36,7 @@ def find_videos(data):
     devuelve = []
 
     patronvideos  = 'vidzi.tv/embed-([a-z0-9A-Z]+)'
-    logger.info("pelisalacarta.servers.vidzi find_videos #"+patronvideos+"#")
+    logger.info("streamondemand.servers.vidzi find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:
@@ -50,7 +50,7 @@ def find_videos(data):
             logger.info("  url duplicada="+url)
             
     patronvideos  = 'vidzi.tv/([a-z0-9A-Z]+)'
-    logger.info("pelisalacarta.servers.vidzi find_videos #"+patronvideos+"#")
+    logger.info("streamondemand.servers.vidzi find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:
