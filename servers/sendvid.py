@@ -16,7 +16,7 @@ def test_video_exists( page_url ):
     return True,""
 
 def get_video_url( page_url , premium = False , user="" , password="", video_password="" ):
-    logger.info("pelisalacarta.servers.sendvid get_video_url(page_url='%s')" % page_url)
+    logger.info("streamondemand.servers.sendvid get_video_url(page_url='%s')" % page_url)
 
     video_urls = []
 
@@ -37,7 +37,7 @@ def get_video_url( page_url , premium = False , user="" , password="", video_pas
         video_urls.append( [ scrapertools.get_filename_from_url(media_url)[-4:]+" [sendvid]",media_url])
 
     for video_url in video_urls:
-        logger.info("pelisalacarta.servers.sendvid %s - %s" % (video_url[0],video_url[1]))
+        logger.info("streamondemand.servers.sendvid %s - %s" % (video_url[0],video_url[1]))
 
     return video_urls
 
@@ -48,7 +48,7 @@ def find_videos(data):
 
     #sendvid.com/embed/1v0chsus
     patronvideos  = 'sendvid.com/embed/([a-zA-Z0-9]+)'
-    logger.info("pelisalacarta.servers.sendvid find_videos #"+patronvideos+"#")
+    logger.info("streamondemand.servers.sendvid find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:

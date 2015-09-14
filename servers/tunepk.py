@@ -12,7 +12,7 @@ from core import logger
 
 # Returns an array of possible video url's from the page_url
 def get_video_url( page_url , premium = False , user="" , password="" , video_password="" ):
-    logger.info("pelisalacarta.tunepk get_video_url(page_url='%s')" % page_url)
+    logger.info("streamondemand.tunepk get_video_url(page_url='%s')" % page_url)
 
     video_urls = []
 
@@ -31,7 +31,7 @@ def get_video_url( page_url , premium = False , user="" , password="" , video_pa
         video_urls.append( video_url )
 
     for video_url in video_urls:
-        logger.info("pelisalacarta.tunepk %s - %s" % (video_url[0],video_url[1]))
+        logger.info("streamondemand.tunepk %s - %s" % (video_url[0],video_url[1]))
 
     return video_urls
 
@@ -42,7 +42,7 @@ def find_videos(text):
 
     # Código embed
     patronvideos  = 'tune.pk/player/embed_player.php\?vid\=(\d+)'
-    logger.info("pelisalacarta.tunepk find_videos #"+patronvideos+"#")
+    logger.info("streamondemand.tunepk find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(text)
 
     for match in matches:
