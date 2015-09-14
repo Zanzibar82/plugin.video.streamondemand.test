@@ -21,6 +21,7 @@ __title__ = "CineBlog 01"
 __language__ = "IT"
 
 sito = "http://www.cb01.eu"
+sitoanime = "http://www.cineblog01.cc"
 
 DEBUG = config.get_setting("debug")
 
@@ -79,15 +80,21 @@ def mainlist(item):
                      url="http://www.cineblog01.cc/anime/",
                      thumbnail="http://orig09.deviantart.net/df5a/f/2014/169/2/a/fist_of_the_north_star_folder_icon_by_minacsky_saya-d7mq8c8.png"),
                 Item(channel=__channel__,
-                     action="listaaz",
-                     title="[COLOR azure]Anime - Lista A-Z[/COLOR]",
-                     url="http://www.cineblog01.cc/anime/lista-completa-anime-cartoon/",
-                     thumbnail="http://i.imgur.com/IjCmx5r.png"),
-                Item(channel=__channel__,
                      action="animegenere",
-                     title="[COLOR azure]Anime Per Genere[/COLOR]",
+                     title="[COLOR azure]Anime - Per Genere[/COLOR]",
                      url="http://www.cineblog01.cc/anime/",
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/Genres.png"),
+                Item(channel=__channel__,
+                     action="listaletra",
+                     title="[COLOR azure]Anime - Per Lettera A-Z[/COLOR]",
+                     url="http://www.cineblog01.cc/anime/",
+                     thumbnail="http://i.imgur.com/IjCmx5r.png"),
+                Item(channel=__channel__,
+                     action="listaaz",
+                     title="[COLOR azure]Anime - Lista Completa[/COLOR]",
+                     url="http://www.cineblog01.cc/anime/lista-completa-anime-cartoon/",
+                     thumbnail="http://i.imgur.com/IjCmx5r.png"),
+
                 Item(channel=__channel__,
                      action="search",
                      title="[COLOR yellow]Cerca Anime[/COLOR]",
@@ -480,14 +487,45 @@ def listaaz(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvid_anime",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title=scrapedtitle,
                  url=scrapedurl,
                  thumbnail="http://www.justforpastime.net/uploads/3/8/1/5/38155083/273372_orig.jpg",
                  plot=scrapedplot))
 
     return itemlist
 
+	
+def listaletra(item):
+    logger.info("[cineblog01.py] listaaz")
+    itemlist = []
 
+    data = scrapertools.cache_page(item.url)
+    logger.info(data)
+
+    # Narrow search by selecting only the combo
+    bloque = scrapertools.get_match(data, '<option value=\'-1\'>Anime per Lettera</option>(.*?)</select>')
+
+    # The categories are the options for the combo  
+    patron = '<option value="([^"]+)">(\([^<]+)\)</option>'
+    matches = re.compile(patron, re.DOTALL).findall(bloque)
+    scrapertools.printMatches(matches)
+
+    for url, titulo in matches:
+        scrapedtitle = titulo
+        scrapedurl = url
+        scrapedthumbnail = ""
+        scrapedplot = ""
+        if (DEBUG): logger.info("title=[" + scrapedtitle + "], url=[" + scrapedurl + "]")
+        itemlist.append(
+            Item(channel=__channel__,
+                 action = "listanime",
+                 title = scrapedtitle,
+                 url=sitoanime + scrapedurl,
+                 thumbnail="http://www.justforpastime.net/uploads/3/8/1/5/38155083/273372_orig.jpg",
+                 plot=scrapedplot))
+
+    return itemlist
+	
 def animegenere(item):
     logger.info("[cineblog01.py] animegenere")
     itemlist = []
@@ -547,7 +585,7 @@ def listanime(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvid_anime",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title=scrapedtitle,
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot))
@@ -702,7 +740,7 @@ def findvid_anime(item):
     data = scrapertools.decodeHtmlentities(data).replace('http://cineblog01.pw', 'http://k4pp4.pw')
 
     patron1 = '(?:<p>|<td bgcolor="#ECEAE1">)<span class="txt_dow">(.*?)(?:</p>)?(?:\s*</span>)?\s*</td>'
-    patron2 = '<a.+?href="([^"]+)"[^>]*>([^<]+)</a>'
+    patron2 = '<a.*?href="([^"]+)"[^>]*>([^<]+)</a>'
     matches1 = re.compile(patron1, re.DOTALL).findall(data)
     if len(matches1) > 0:
         for match1 in re.split('<br />|<p>', matches1[0]):
