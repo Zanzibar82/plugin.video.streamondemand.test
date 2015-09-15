@@ -104,6 +104,6 @@ def fichas(item):
 
     ## Paginación
     url = api_search % (texto, "50", nextPageToken)
-    itemlist.append( Item( channel=__channel__, title=">> Página siguiente", url=url, action="fichas", folder=True ) )
+    itemlist.append( Item( channel=__channel__, title="Pagina successiva >>", url=url, action="fichas", folder=True ) )
 
     return itemlist
