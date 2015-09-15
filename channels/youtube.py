@@ -100,7 +100,7 @@ def fichas(item):
         show = library.title_to_folder_name( title )
         plot = scrapertools.htmlclean( plot )
 
-        itemlist.append( Item( channel=__channel__, title=title, url=url, action="play", thumbnail=thumbnail, fanart=fanart, plot=plot, server="youtube", fulltitle=fulltitle, show=show, folder=False ) )
+        itemlist.append( Item( channel=__channel__, title=title, url=url, action="play", thumbnail=thumbnail, fanart=fanart, plot=plot, server="youtube", fulltitle=fulltitle, viewmode="movie_with_plot", show=show, folder=False ) )
 
     ## Paginación
     url = api_search % (texto, "50", nextPageToken)
