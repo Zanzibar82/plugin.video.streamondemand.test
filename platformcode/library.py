@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 #------------------------------------------------------------
 # streamondemand - XBMC Plugin
-# Herramientas de integraciÃ³n en LibrerÃ­a
+# Herramientas de integración en Librería
 # http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 # Autor: jurrabi
 #------------------------------------------------------------
@@ -21,8 +21,8 @@ from core import scrapertools
 
 CHANNELNAME = "library"
 allchars = string.maketrans('', '')
-deletechars = '\\/:*"<>|?' #Caracteres no vÃ¡lidos en nombres de archivo
-# Esto permite su ejecuciÃ³n en modo emulado (preguntar a jesus por esto)
+deletechars = '\\/:*"<>|?' #Caracteres no válidos en nombres de archivo
+# Esto permite su ejecución en modo emulado (preguntar a jesus por esto)
 # seguro que viene bien para debuguear
 try:
     pluginhandle = int( sys.argv[ 1 ] )
@@ -49,30 +49,30 @@ if not os.path.exists(SERIES_PATH):
     os.mkdir(SERIES_PATH)
 
 def elimina_tildes(s):
-    s = s.replace("Ã","a")
-    s = s.replace("Ã‰","e")
-    s = s.replace("Ã","i")
-    s = s.replace("Ã“","o")
-    s = s.replace("Ãš","u")
-    s = s.replace("Ã¡","a")
-    s = s.replace("Ã©","e")
-    s = s.replace("Ã­","i")
-    s = s.replace("Ã³","o")
-    s = s.replace("Ãº","u")
-    s = s.replace("Ã€","a")
-    s = s.replace("Ãˆ","e")
-    s = s.replace("ÃŒ","i")
-    s = s.replace("Ã’","o")
-    s = s.replace("Ã™","u")
-    s = s.replace("Ã ","a")
-    s = s.replace("Ã¨","e")
-    s = s.replace("Ã¬","i")
-    s = s.replace("Ã²","o")
-    s = s.replace("Ã¹","u")
-    s = s.replace("Ã§","c")
-    s = s.replace("Ã‡","C")
-    s = s.replace("Ã‘","n")
-    s = s.replace("Ã±","n")
+    s = s.replace("Á","a")
+    s = s.replace("É","e")
+    s = s.replace("Í","i")
+    s = s.replace("Ó","o")
+    s = s.replace("Ú","u")
+    s = s.replace("á","a")
+    s = s.replace("é","e")
+    s = s.replace("í","i")
+    s = s.replace("ó","o")
+    s = s.replace("ú","u")
+    s = s.replace("À","a")
+    s = s.replace("È","e")
+    s = s.replace("Ì","i")
+    s = s.replace("Ò","o")
+    s = s.replace("Ù","u")
+    s = s.replace("à","a")
+    s = s.replace("è","e")
+    s = s.replace("ì","i")
+    s = s.replace("ò","o")
+    s = s.replace("ù","u")
+    s = s.replace("ç","c")
+    s = s.replace("Ç","C")
+    s = s.replace("Ñ","n")
+    s = s.replace("ñ","n")
     return s
 
 def title_to_folder_name(title):
@@ -93,8 +93,8 @@ def savelibrary(titulo="",url="",thumbnail="",server="",plot="",canal="",categor
         filename=string.translate(titulo,allchars,deletechars)+".strm"
         fullfilename = os.path.join(MOVIES_PATH,filename)
     elif category == "Series":
-        if Serie == "": #AÃ±adir comprobaciÃ³n de len>0 bien hecha
-            logger.info('[library.py] savelibrary ERROR: intentando aÃ±adir una serie y serie=""')
+        if Serie == "": #Añadir comprobación de len>0 bien hecha
+            logger.info('[library.py] savelibrary ERROR: intentando añadir una serie y serie=""')
             pathserie = SERIES_PATH
         else:
             #Eliminamos caracteres indeseados para archivos en el nombre de la serie
@@ -108,9 +108,9 @@ def savelibrary(titulo="",url="",thumbnail="",server="",plot="",canal="",categor
                 os.mkdir(pathserie)
 
         #Limpiamos el titulo para usarlo como fichero
-        from  core import scrapertools
-        filename = scrapertools.get_season_and_episode(titulo)+".strm"
-        #filename=string.translate(titulo,allchars,deletechars)+".strm"
+        #from  core import scrapertools
+        #filename = scrapertools.get_season_and_episode(titulo)+".strm"
+        filename=string.translate(titulo,allchars,deletechars)+".strm"
 
         fullfilename = os.path.join(pathserie,filename)
     else:    #Resto de categorias de momento en la raiz de library
@@ -129,7 +129,7 @@ def savelibrary(titulo="",url="",thumbnail="",server="",plot="",canal="",categor
         nuevo = 0
         raise
 #    itemurl = '%s?channel=%s&action=%s&category=%s&title=%s&url=%s&thumbnail=%s&plot=%s&server=%s' % ( sys.argv[ 0 ] , canal , "strm" , urllib.quote_plus( category ) , urllib.quote_plus( titulo ) , urllib.quote_plus( url ) , urllib.quote_plus( thumbnail ) , urllib.quote_plus( plot ) , server )
-# EliminaciÃ³n de plot y thumnail
+# Eliminación de plot y thumnail
     addon_name = sys.argv[ 0 ]
     if addon_name.strip()=="":
         addon_name="plugin://plugin.video.streamondemand/"
@@ -150,43 +150,43 @@ def savelibrary(titulo="",url="",thumbnail="",server="",plot="",canal="",categor
     
 def update(total,errores=0, nuevos=0, serie="No indicada"):
     logger.info("[library.py] update")
-    """Pide Resumen de actualizaciÃ³n. AdemÃ¡s pregunta y actualiza la Biblioteca
+    """Pide Resumen de actualización. Además pregunta y actualiza la Biblioteca
     
-    nuevos: NÃºmero de episodios actualizados. Se muestra como resumen en la ventana 
-            de confirmaciÃ³n.
-    total:  NÃºmero de episodios Totales en la Biblioteca. Se muestra como resumen 
-            en la ventana de confirmaciÃ³n.
-    Erores: NÃºmero de episodios que no se pudo aÃ±adir (generalmente por caracteres 
-            no vÃ¡lidos en el nombre del archivo o por problemas de permisos.
+    nuevos: Número de episodios actualizados. Se muestra como resumen en la ventana 
+            de confirmación.
+    total:  Número de episodios Totales en la Biblioteca. Se muestra como resumen 
+            en la ventana de confirmación.
+    Erores: Número de episodios que no se pudo añadir (generalmente por caracteres 
+            no válidos en el nombre del archivo o por problemas de permisos.
     """
     
     if nuevos == 1:
-        texto = 'Se ha aÃ±adido 1 episodio a la Biblioteca (%d en total)' % (total,)
+        texto = 'Se ha añadido 1 episodio a la Biblioteca (%d en total)' % (total,)
     else:
-        texto = 'Se han aÃ±adido %d episodios a la Biblioteca (%d en total)' % (nuevos,total)
+        texto = 'Se han añadido %d episodios a la Biblioteca (%d en total)' % (nuevos,total)
 
     logger.info("[library.py] update - %s" % texto)
     advertencia = xbmcgui.Dialog()
 
-    # Pedir confirmaciÃ³n para actualizar la biblioteca
+    # Pedir confirmación para actualizar la biblioteca
     if nuevos > 0:
         logger.info("[library.py] update - nuevos")
         if errores == 0:
-            actualizar = advertencia.yesno('streamondemand' , texto ,'Â¿Deseas que actualice ahora la Biblioteca?')
-        else:  # Si hubo errores muestra una lÃ­nea adicional en la pregunta de actualizar biblioteca
+            actualizar = advertencia.yesno('streamondemand' , texto ,'¿Deseas que actualice ahora la Biblioteca?')
+        else:  # Si hubo errores muestra una línea adicional en la pregunta de actualizar biblioteca
             if errores == 1:
-                texto2 = '(No se pudo aÃ±adir 1 episodio)'
+                texto2 = '(No se pudo añadir 1 episodio)'
             else:
-                texto2 = '(No se pudieron aÃ±adir '+str(errores)+' episodios)'
-            actualizar = advertencia.yesno('streamondemand' , texto , texto2 , 'Â¿Deseas que actualice ahora la Biblioteca?')
+                texto2 = '(No se pudieron añadir '+str(errores)+' episodios)'
+            actualizar = advertencia.yesno('streamondemand' , texto , texto2 , '¿Deseas que actualice ahora la Biblioteca?')
     else: #No hay episodios nuevos -> no actualizar
         logger.info("[library.py] update - no nuevos")
         if errores == 0:
             texto2 = ""
         elif errores == 1:
-            texto2 = '(No se pudo aÃ±adir 1 episodio)'
+            texto2 = '(No se pudo añadir 1 episodio)'
         else:
-            texto2 = '(No se pudieron aÃ±adir '+str(errores)+' episodios)'
+            texto2 = '(No se pudieron añadir '+str(errores)+' episodios)'
         #advertencia.ok('streamondemand',texto,texto2)
         actualizar = False
     
@@ -199,32 +199,32 @@ def update(total,errores=0, nuevos=0, serie="No indicada"):
     logger.info ('[Library update] Serie: "%s". Total: %d, Erroneos: %d, Nuevos: %d' %(serie, total, errores, nuevos))
 
 def MonitorSerie ( canal, accion, server, url, serie): 
-    ''' AÃ±ade una serie a la lista de series a monitorizar.
+    ''' Añade una serie a la lista de series a monitorizar.
     
-    Si se configura para que lo haga streamondemand arrancarÃ¡ un proceso al inicio de XBMC
-    para monitorizar las series que se desee mediante una llamada a esta funciÃ³n.
+    Si se configura para que lo haga streamondemand arrancará un proceso al inicio de XBMC
+    para monitorizar las series que se desee mediante una llamada a esta función.
     Los episodios nuevos que vayan apareciendo en la web del canal para la serie indicada
-    se irÃ¡n aÃ±diendo a la biblioteca.
+    se irán añdiendo a la biblioteca.
     Para dejar de monitorizar una serie llamar a StopMonitorSerie
     '''
     parser = xml.parsers.expat.ParserCreate()
     
     
 def fixStrmLibrary(path = LIBRARY_PATH):
-    '''Revisa todos los ficheros strm de la librerÃ­a y repara la url del plugin
+    '''Revisa todos los ficheros strm de la librería y repara la url del plugin
     
     Este cambio es necesario con el paso a XBMC Dharma (10.5) donde las url de
     plugin cambiaron de:
       plugin://video/streamondemand/
     a: 
       plugin://plugin.video.streamondemand/
-    dado que esto podrÃ­a volver a pasar (en ciertos momentos se ha estado
-    experimentando con urls del tipo addon://... hemos decidido crear esta funciÃ³n
+    dado que esto podría volver a pasar (en ciertos momentos se ha estado
+    experimentando con urls del tipo addon://... hemos decidido crear esta función
     para arreglar los strm en cualquier momento.
     '''
     logger.info("[library.py] fixStrm")
     logger.info("[library.py] fixStrm path="+path)
-    # Comprobamos la validez del parÃ¡metro
+    # Comprobamos la validez del parámetro
     if not os.path.exists(path):
         logger.info("[library.py] fixStrm ERROR: PATH NO EXISTE")
         return 0
@@ -242,7 +242,7 @@ def fixStrmLibrary(path = LIBRARY_PATH):
                 else:
                     logger.info("[library.py] fixStrm ERROR al fixear "+file)
                     errores = errores + 1
-        #Excluye las carpetas de SubversiÃ³n de la bÃºsqueda
+        #Excluye las carpetas de Subversión de la búsqueda
         if ".svn" in dirnames:
             dirnames.remove (".svn")
     return total,errores

@@ -496,7 +496,8 @@ def episodio_ya_descargado(show_title,episode_title):
 
     for fichero in ficheros:
         #logger.info("fichero="+fichero)
-        if fichero.lower().startswith(show_title.lower()) and scrapertools.find_single_match(fichero,"(\d+x\d+)")==episode_title:
+        #if fichero.lower().startswith(show_title.lower()) and scrapertools.find_single_match(fichero,"(\d+x\d+)")==episode_title:
+        if fichero.lower().startswith(show_title.lower()) and episode_title in fichero:
             logger.info("encontrado!")
             return True
 
@@ -521,10 +522,6 @@ def download_all_episodes(item,channel,first_episode="",preferred_server="vidspo
 
     from servers import servertools
     from core import downloadtools
-    from core import scrapertools
-
-    best_server = preferred_server
-    worst_server = "moevideos"
 
     # Para cada episodio
     if first_episode=="":
@@ -535,7 +532,8 @@ def download_all_episodes(item,channel,first_episode="",preferred_server="vidspo
     for episode_item in episode_itemlist:
         try:
             logger.info("streamondemand.platformcode.launcher download_all_episodes, episode="+episode_item.title)
-            episode_title = scrapertools.get_match(episode_item.title,"(\d+x\d+)")
+            #episode_title = scrapertools.get_match(episode_item.title,"(\d+x\d+)")
+            episode_title = episode_item.title
             logger.info("streamondemand.platformcode.launcher download_all_episodes, episode="+episode_title)
         except:
             import traceback
@@ -560,64 +558,8 @@ def download_all_episodes(item,channel,first_episode="",preferred_server="vidspo
 
         descargado = False
 
-        new_mirror_itemlist_1 = []
-        new_mirror_itemlist_2 = []
-        new_mirror_itemlist_3 = []
-        new_mirror_itemlist_4 = []
-        new_mirror_itemlist_5 = []
-        new_mirror_itemlist_6 = []
-
-        for mirror_item in mirrors_itemlist:
-            
-            # Si está en español va al principio, si no va al final
-            if "(Español)" in mirror_item.title:
-                if best_server in mirror_item.title.lower():
-                    new_mirror_itemlist_1.append(mirror_item)
-                else:
-                    new_mirror_itemlist_2.append(mirror_item)
-            elif "(Latino)" in mirror_item.title:
-                if best_server in mirror_item.title.lower():
-                    new_mirror_itemlist_3.append(mirror_item)
-                else:
-                    new_mirror_itemlist_4.append(mirror_item)
-            elif "(VOS)" in mirror_item.title:
-                if best_server in mirror_item.title.lower():
-                    new_mirror_itemlist_3.append(mirror_item)
-                else:
-                    new_mirror_itemlist_4.append(mirror_item)
-            else:
-                if best_server in mirror_item.title.lower():
-                    new_mirror_itemlist_5.append(mirror_item)
-                else:
-                    new_mirror_itemlist_6.append(mirror_item)
-
-        mirrors_itemlist = new_mirror_itemlist_1 + new_mirror_itemlist_2 + new_mirror_itemlist_3 + new_mirror_itemlist_4 + new_mirror_itemlist_5 + new_mirror_itemlist_6
-
         for mirror_item in mirrors_itemlist:
             logger.info("streamondemand.platformcode.launcher download_all_episodes, mirror="+mirror_item.title)
-
-            if "(Español)" in mirror_item.title:
-                idioma="(Español)"
-                codigo_idioma="es"
-            elif "(Latino)" in mirror_item.title:
-                idioma="(Latino)"
-                codigo_idioma="lat"
-            elif "(VOS)" in mirror_item.title:
-                idioma="(VOS)"
-                codigo_idioma="vos"
-            elif "(VO)" in mirror_item.title:
-                idioma="(VO)"
-                codigo_idioma="vo"
-            else:
-                idioma="(Desconocido)"
-                codigo_idioma="desconocido"
-
-            logger.info("streamondemand.platformcode.launcher filter_language=#"+filter_language+"#, codigo_idioma=#"+codigo_idioma+"#")
-            if filter_language=="" or (filter_language!="" and filter_language==codigo_idioma):
-                logger.info("streamondemand.platformcode.launcher download_all_episodes, downloading mirror")
-            else:
-                logger.info("streamondemand.platformcode.launcher language "+codigo_idioma+" filtered, skipping")
-                continue
 
             if hasattr(channel, 'play'):
                 video_items = channel.play(mirror_item)
@@ -634,8 +576,7 @@ def download_all_episodes(item,channel,first_episode="",preferred_server="vidspo
                 if puedes:
                     logger.info("streamondemand.platformcode.launcher download_all_episodes, downloading mirror started...")
                     # El vídeo de más calidad es el último
-                    mediaurl = video_urls[len(video_urls)-1][1]
-                    devuelve = downloadtools.downloadbest(video_urls,show_title+" "+episode_title+" "+idioma+" ["+video_item.server+"]",continuar=False)
+                    devuelve = downloadtools.downloadbest(video_urls,show_title+" "+episode_title+" ["+video_item.server+"]",continuar=False)
 
                     if devuelve==0:
                         logger.info("streamondemand.platformcode.launcher download_all_episodes, download ok")
