@@ -91,6 +91,15 @@
 </server>
 
 <server>
+    <id>cloudifer</id>
+    <update_url>https://raw.githubusercontent.com/Zanzibar82/plugin.video.streamondemand/master/servers/cloudifer.py</update_url>
+    <active>true</active>
+    <version>1</version>
+    <date>17/09/2015</date>
+    <changes>Prima versione di Pelisalacarta 4</changes>
+</server>
+
+<server>
     <id>cloudzer</id>
     <update_url>https://raw.githubusercontent.com/Zanzibar82/plugin.video.streamondemand/master/servers/cloudzer.py</update_url>
     <active>true</active>
@@ -528,6 +537,15 @@
     <active>true</active>
     <version>1</version>
     <date>12/09/2015</date>
+    <changes>Prima versione di Pelisalacarta 4</changes>
+</server>
+
+<server>
+    <id>megadrive</id>
+    <update_url>https://raw.githubusercontent.com/Zanzibar82/plugin.video.streamondemand/master/servers/megadrive.py</update_url>
+    <active>true</active>
+    <version>1</version>
+    <date>17/09/2015</date>
     <changes>Prima versione di Pelisalacarta 4</changes>
 </server>
 
