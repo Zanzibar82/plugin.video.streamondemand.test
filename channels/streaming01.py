@@ -80,7 +80,7 @@ def peliculas(item):
     patron += '<img src="(.*?)"[^>]+>\s*'
     patron += '</a>\s*'
     patron += '<div[^>]+>\s*'
-    patron += '<h3>[^>]+>(.*?)</a></h3>'
+    patron += '<h3>[^>]+>(.*?)</a>'
     matches = re.compile(patron,re.DOTALL).findall(data)
     scrapertools.printMatches(matches)
 
