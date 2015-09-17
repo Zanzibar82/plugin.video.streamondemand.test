@@ -56,7 +56,7 @@ def peliculas(item):
         itemlist.append( Item(channel=__channel__, action="findvideos", title=scrapedtitle, url=scrapedurl , thumbnail=scrapedthumbnail , plot=scrapedplot , folder=True) )
 
     # Extrae el paginador
-    patronvideos  = '<div id="older" class="alignright"><a href="(.*?)".*?>>>> Post vecchi >>>'
+    patronvideos  = 'a class="nextpostslink" rel="next" href="(.*?)">&raquo;'
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
     scrapertools.printMatches(matches)
 
