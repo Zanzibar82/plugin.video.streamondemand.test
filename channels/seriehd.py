@@ -132,7 +132,7 @@ def episodios(item):
 
     if config.get_library_support():
         itemlist.append( Item(channel=__channel__, title=item.title, url=item.url, action="add_serie_to_library", extra="episodios", show=item.show) )
-        itemlist.append( Item(channel=item.channel, title="Descargar todos los episodios de la serie", url=item.url, action="download_all_episodes", extra="episodios", show=item.show) )			
+        itemlist.append( Item(channel=item.channel, title="Scarica tutti gli episodi della serie", url=item.url, action="download_all_episodes", extra="episodios", show=item.show) )
 			
     return itemlist
 
