@@ -11,6 +11,7 @@
     <setting id="languagefilter" type="enum" lvalues="30025|30026|30027|30028|30029|30046|30016|30023|30036|30037" values="0|1|2|3|4" label="30019" default="3"/>
     <setting id="forceview" type="bool" label ="30043" default="false"/>
     <setting id="player_mode" type="enum" values="Direct|SetResolvedUrl|Built-In|Download and Play" label="30044" default="0"/>
+    <setting id="sportsmyteam" type="text" label="Imposta la tua squadra di calcio preferita:" default="Inter"/>
   </category>
   
   <!-- Login -->
