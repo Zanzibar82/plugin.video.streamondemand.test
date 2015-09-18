@@ -101,6 +101,8 @@ def run():
                 exec "import channels."+channel_name+" as channel"
             elif os.path.exists( core_channel_path ):
                 exec "from core import "+channel_name+" as channel"
+            elif channel_name[:7]=="sports-":
+                exec "import streamondemand.channels_sports."+channel_name[7:]+" as channel"
 
             logger.info("streamondemand.platformcode.launcher running channel %s %s" % (channel.__name__ , channel.__file__))
 
