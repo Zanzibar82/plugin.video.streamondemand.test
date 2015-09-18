@@ -66,7 +66,7 @@ def cat_attori(item):
     data = scrapertools.cache_page(item.url)
     
     # Extrae las entradas (carpetas)
-    patron  = '<a href="(.*?)">(.*?)</a>[^<]+<span[^>]+>[^>]+>[^>]+>[^>]+><'
+    patron  = '<a href="(.*?)">(.*?)</a>.*?<span'
     matches = re.compile(patron,re.DOTALL).findall(data)
     scrapertools.printMatches(matches)
 
@@ -86,7 +86,7 @@ def cat_attrici(item):
     data = scrapertools.cache_page(item.url)
     
     # Extrae las entradas (carpetas)
-    patron  = '<a href="(.*?)">(.*?)</a>[^<]+<span'
+    patron  = '<a href="(.*?)">(.*?)</a>.*?<span'
     matches = re.compile(patron,re.DOTALL).findall(data)
     scrapertools.printMatches(matches)
 
