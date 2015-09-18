@@ -12,7 +12,7 @@ from core import config
 from core import scrapertools
 from core.item import Item
 from servers import servertools
-from pelisalacarta.channels_sports import sportstools as SPT
+from channels.channels_sports import sportstools as SPT
 
 __channel__ = "sports-main"
 __title__ = "Deportes"
